@@ -30,7 +30,6 @@ route.post("/", async (req: Request, res: Response) => {
 	);
 
 	user.password = await bcrypt.hash(user.password, salt);
-	console.log(user.password);
 
 	await user.save();
 
