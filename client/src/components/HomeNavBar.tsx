@@ -8,7 +8,7 @@ interface Props {
 const HomeNavBar = ({ buttonName, schoolName }: Props) => {
 	return (
 		<>
-			<nav className="flex h-full w-screen flex-row items-center justify-between border-b-2 bg-white pl-0 p-2 dark:bg-stone-900 dark:text-gray-200 transition-all duration">
+			<nav className="duration flex h-full w-screen flex-row items-center justify-between border-b-2 bg-white p-2 pl-0 transition-all dark:bg-stone-900 dark:text-gray-200 lg:pl-2">
 				<div className="flex items-center justify-center md:gap-4">
 					<img
 						src={logo}
