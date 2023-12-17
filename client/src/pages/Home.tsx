@@ -8,6 +8,7 @@ const Home = () => {
 			<HomeNavBar
 				buttonName="Get Started"
 				schoolName="BEDEKU TECHNICAL INSTITUTE"
+				linkTo={"/register"}
 			/>
 			<HomeMain
 				headingText="Education is always the key to success."

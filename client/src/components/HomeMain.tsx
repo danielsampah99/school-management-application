@@ -1,6 +1,6 @@
 import mainImage from "../assets/backgroundImageHomeMain.png";
 
-interface Props {
+export interface Props {
 	headingText: string;
 	bodyText: string;
 }
