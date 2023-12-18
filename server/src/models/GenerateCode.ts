@@ -6,16 +6,16 @@ export interface IGenerateCode {
 }
 
 const generateCode = new mongoose.Schema<IGenerateCode>({
-	code: String
-})
+	code: String,
+});
 
-const GenerateCode = mongoose.model('GenerateCode', generateCode)
+const GenerateCode = mongoose.model("GenerateCode", generateCode);
 
-export function validateCode (code: IGenerateCode) {
+export function validateCode(code: IGenerateCode) {
 	const schema = Joi.object({
-		code: Joi.string().min(8).max(8)
-	})
-	return schema.validate(code)
-} 
+		code: Joi.string().min(8).max(8),
+	});
+	return schema.validate(code);
+}
 
-export default GenerateCode
+export default GenerateCode;

@@ -12,6 +12,7 @@ const router = express.Router();
 
 router.post("/", async (req: Request, res: Response) => {
 	const jwtSecretKey: string | undefined = process.env.JWTSECRETKEY;
+
 	const { error } = validateUserLogin(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
@@ -23,7 +24,7 @@ router.post("/", async (req: Request, res: Response) => {
 
 	const token = user.generateAuthToken();
 
-	res.header("x-auth-token", token).send(_.pick(user, ["id", "name"]));
+	res.header("x-auth-token", token).send(_.pick(user, ["id", "email"]));
 });
 
 export const validateUserLogin = (user: IUserLoginSchema) => {
@@ -40,10 +41,7 @@ export const validateUserLogin = (user: IUserLoginSchema) => {
 			.string()
 			.required()
 			.min(8)
-			.max(12)
-			.lowercase()
-			.minOfNumeric(1)
-			.pattern(new RegExp("^[a-zA-Z0-9]{8,12}$")),
+			.max(12),
 	});
 
 	return schema.validate(user);

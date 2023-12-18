@@ -22,10 +22,8 @@ const RegisterMain = () => {
 
 	const onSubmit = handleSubmit(async (formData: RegistrationFormValues) => {
 		try {
-			
 			await apiClient.post("/api/register", formData);
 			toast.success("Account successfully created. Proceed to login.");
-			
 		} catch (error) {
 			toast.error("Registration failed! something went wrong");
 			console.error(error);
@@ -42,9 +40,9 @@ const RegisterMain = () => {
 
 					<form onSubmit={onSubmit}>
 						<label htmlFor="name">
-							Name 
+							Name
 							{errors.name && (
-								<div className="inline ml-1 text-base font-medium text-red-700 dark:text-red-500">
+								<div className="ml-1 inline text-base font-medium text-red-700 dark:text-red-500">
 									{errors.name.message}
 								</div>
 							)}
@@ -63,13 +61,14 @@ const RegisterMain = () => {
 								type="text"
 								id="name"
 								placeholder="Enter your full name"
+								autoComplete="name"
 								className="form-input mb-5 block w-full rounded-lg border border-gray-300 bg-gray-50 px-2.5 py-2 ps-10 text-base text-gray-900 hover:placeholder:italic focus:border-neutral-400  focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-zinc-300 dark:placeholder-gray-400  dark:focus:border-zinc-600 dark:focus:ring-stone-500"
 							/>
 						</div>
 						<label htmlFor="email">
 							Email address
 							{errors.email && (
-								<div className="inline text-sm ml-1 font-medium text-red-700 dark:text-red-500">
+								<div className="ml-1 inline text-sm font-medium text-red-700 dark:text-red-500">
 									{errors.email.message}
 								</div>
 							)}
@@ -85,6 +84,7 @@ const RegisterMain = () => {
 							</div>
 							<input
 								{...register("email")}
+								autoComplete="email"
 								type="email"
 								id="email"
 								placeholder="Enter your email address"
@@ -94,7 +94,7 @@ const RegisterMain = () => {
 						<label htmlFor="password">
 							Password
 							{errors.password && (
-								<div className="inline text-sm ml-1 font-medium text-red-700 dark:text-red-500">
+								<div className="ml-1 inline text-sm font-medium text-red-700 dark:text-red-500">
 									{errors.password.message}
 								</div>
 							)}
@@ -112,6 +112,7 @@ const RegisterMain = () => {
 								{...register("password")}
 								type="password"
 								id="password"
+								maxLength={15}
 								placeholder="Enter your full password"
 								className="form-input mb-5 block w-full rounded-lg border border-gray-300 bg-gray-50 px-2.5 py-2 ps-10 text-base text-gray-900 hover:placeholder:italic focus:border-neutral-400  focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-zinc-300 dark:placeholder-gray-400  dark:focus:border-zinc-600 dark:focus:ring-stone-500"
 							/>
@@ -124,10 +125,10 @@ const RegisterMain = () => {
 						</button>
 					</form>
 					<p>
-						Already have an account? Click here to 
+						Already have an account? Click here to
 						<Link
 							to={"/login"}
-							className="font-medium ml-2 text-blue-600 hover:underline dark:text-blue-500"
+							className="ml-2 font-medium text-blue-600 hover:underline dark:text-blue-500"
 						>
 							log in
 						</Link>
