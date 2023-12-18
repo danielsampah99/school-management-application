@@ -50,7 +50,7 @@ const UserRegistration = mongoose.model(
 
 export const validateUserRegistration = (user: IUserRegistrationSchema) => {
 	const schema = Joi.object({
-		name: Joi.string().required().min(8).max(8),
+		name: Joi.string().min(8).max(8).required(),
 		email: Joi.string()
 			.required()
 			.min(8)

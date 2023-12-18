@@ -21,10 +21,6 @@ route.post("/", async (req: Request, res: Response) => {
 	let user = await UserRegistration.findOne({ email: req.body.email });
 	if (user) return res.status(400).send(`User already registered.`);
 
-	// TODO: change name to unique code.
-	// user = await UserRegistration.findOne({ name: req.body.name });
-	// if (!user) return res.status(400).send(`Invalid name submitted`);
-
 	user = new UserRegistration(
 		_.pick(req.body, ["name", "email", "password", "_id"]),
 	);
@@ -33,9 +29,7 @@ route.post("/", async (req: Request, res: Response) => {
 
 	await user.save();
 
-	const token: string = user.generateAuthToken();
-
-	res.header("x-auth-token", token).send(
+	res.send(
 		_.pick<IUserRegistrationSchema>(user, ["name", "email", "_id"]),
 	);
 });
