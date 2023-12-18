@@ -16,8 +16,8 @@ const userRegistrationSchema = new mongoose.Schema<IUserRegistrationSchema>({
 	name: {
 		type: String,
 		unique: true,
-		minlength: 8,
-		maxlength: 8,
+		minlength: 4,
+		maxlength: 20,
 		required: true,
 	},
 	email: {
@@ -50,7 +50,7 @@ const UserRegistration = mongoose.model(
 
 export const validateUserRegistration = (user: IUserRegistrationSchema) => {
 	const schema = Joi.object({
-		name: Joi.string().min(8).max(8).required(),
+		name: Joi.string().min(4).max(20).required(),
 		email: Joi.string()
 			.required()
 			.min(8)
@@ -63,9 +63,7 @@ export const validateUserRegistration = (user: IUserRegistrationSchema) => {
 			.string()
 			.required()
 			.min(8)
-			.max(12)
-			.lowercase()
-			.minOfNumeric(1)
+			.max(15)
 			.pattern(new RegExp("^[a-zA-Z0-9]{8,12}$")),
 	});
 

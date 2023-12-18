@@ -5,6 +5,7 @@ import "./index.css";
 import Home from "./pages/Home.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import Register from "./pages/Register.tsx";
+import Login from "./pages/Login.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
 	{
 		path: "/register",
 		element: <Register />,
+	},
+	{
+		path: "/login",
+		element: <Login />,
 	},
 ]);
 

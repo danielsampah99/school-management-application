@@ -13,15 +13,15 @@ export interface RegistrationFormErrors {
 }
 
 export const RegistrationSchema = z.object({
-	name: z.string().length(8),
+	name: z
+		.string()
+		.max(20, "Full name cannot be more than 30 characters.")
+		.min(4, "Name should at least be 4 of lenght 4 characters"),
 	email: z.string().email(),
 	password: z
 		.string()
-		.min(8)
-		.max(15)
-		.refine((value) => {
-			return value.match(/.*[A-Z].*/) && value.match(/.*\d.*/);
-		}),
+		.min(8, "password must be atleast 8 characters.")
+		.max(15, "password should not be more than 15 characters."),
 });
 
 export type RegistrationFormValidationErrors = ZodError<RegistrationFormValues>;

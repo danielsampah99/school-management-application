@@ -29,9 +29,7 @@ route.post("/", async (req: Request, res: Response) => {
 
 	await user.save();
 
-	res.send(
-		_.pick<IUserRegistrationSchema>(user, ["name", "email", "_id"]),
-	);
+	res.send(_.pick<IUserRegistrationSchema>(user, ["name", "email", "_id"]));
 });
 
 export default route;
