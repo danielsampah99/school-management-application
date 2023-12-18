@@ -9,6 +9,7 @@ import {
 } from "../schema/registrationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast, { Toaster } from "react-hot-toast";
+import apiClient from "../services/apiClient";
 
 const RegisterMain = () => {
 	const {
@@ -19,14 +20,17 @@ const RegisterMain = () => {
 		resolver: zodResolver(RegistrationSchema),
 	});
 
-	const onFormSubmit = async () => {
+	const onSubmit = handleSubmit(async (formData: RegistrationFormValues) => {
 		try {
-			console.log("Registration successful. Proceed to login.");
-			toast.success("Registration successful. Proceed to login.");
+			
+			await apiClient.post("/api/register", formData);
+			toast.success("Account successfully created. Proceed to login.");
+			
 		} catch (error) {
-			console.log(errors);
+			toast.error("Registration failed! something went wrong");
+			console.error(error);
 		}
-	};
+	});
 
 	return (
 		<>
@@ -36,11 +40,11 @@ const RegisterMain = () => {
 						Create an account
 					</h1>
 
-					<form onSubmit={handleSubmit(onFormSubmit)}>
+					<form onSubmit={onSubmit}>
 						<label htmlFor="name">
-							Name{" "}
+							Name 
 							{errors.name && (
-								<div className="inline text-base font-medium text-red-700 dark:text-red-500">
+								<div className="inline ml-1 text-base font-medium text-red-700 dark:text-red-500">
 									{errors.name.message}
 								</div>
 							)}
@@ -63,9 +67,9 @@ const RegisterMain = () => {
 							/>
 						</div>
 						<label htmlFor="email">
-							Email address{" "}
+							Email address
 							{errors.email && (
-								<div className="inline text-sm font-medium text-red-700 dark:text-red-500">
+								<div className="inline text-sm ml-1 font-medium text-red-700 dark:text-red-500">
 									{errors.email.message}
 								</div>
 							)}
@@ -88,9 +92,9 @@ const RegisterMain = () => {
 							/>
 						</div>
 						<label htmlFor="password">
-							Password{" "}
+							Password
 							{errors.password && (
-								<div className="inline text-sm font-medium text-red-700 dark:text-red-500">
+								<div className="inline text-sm ml-1 font-medium text-red-700 dark:text-red-500">
 									{errors.password.message}
 								</div>
 							)}
@@ -120,10 +124,10 @@ const RegisterMain = () => {
 						</button>
 					</form>
 					<p>
-						Already have an account? Click here to{" "}
+						Already have an account? Click here to 
 						<Link
 							to={"/login"}
-							className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+							className="font-medium ml-2 text-blue-600 hover:underline dark:text-blue-500"
 						>
 							log in
 						</Link>
