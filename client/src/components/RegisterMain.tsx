@@ -10,8 +10,15 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast, { Toaster } from "react-hot-toast";
 import apiClient from "../services/apiClient";
+import { useState } from "react";
 
 const RegisterMain = () => {
+	const [showPassword, setShowPassword] = useState("password");
+
+	const handleShowPassword = () => {
+		setShowPassword(showPassword === "password" ? "text" : "password");
+	};
+
 	const {
 		register,
 		handleSubmit,
@@ -100,7 +107,10 @@ const RegisterMain = () => {
 							)}
 						</label>
 						<div className="relative">
-							<div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3.5">
+							<div
+								className="pointer-events-auto absolute inset-y-0 start-0 flex items-center ps-3.5"
+								onClick={handleShowPassword}
+							>
 								<img
 									src={password}
 									alt="password icon"
@@ -110,7 +120,7 @@ const RegisterMain = () => {
 							</div>
 							<input
 								{...register("password")}
-								type="password"
+								type={showPassword}
 								id="password"
 								maxLength={15}
 								placeholder="Enter your full password"
@@ -119,7 +129,7 @@ const RegisterMain = () => {
 						</div>
 						<button
 							type="submit"
-							className="mb-2 me-2 mt-3 w-full rounded-lg bg-gradient-to-r from-blue-500  via-blue-600 to-blue-700 px-5 py-2.5 text-center text-base font-semibold text-white hover:bg-gradient-to-br focus:outline-none"
+							className="mb-2 me-2 mt-3 w-full rounded-lg bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700  px-5 py-2.5 text-center text-base font-semibold text-white hover:bg-gradient-to-l focus:outline-none"
 						>
 							Sign Up
 						</button>
