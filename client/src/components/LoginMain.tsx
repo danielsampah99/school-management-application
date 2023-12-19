@@ -6,8 +6,15 @@ import password from "../assets/password.svg";
 import { Link } from "react-router-dom";
 import apiClient from "../services/apiClient";
 import { toast } from "react-hot-toast";
+import { useState } from "react";
 
 const LoginMain = () => {
+	const [showPassword, setShowPassword] = useState("password");
+
+	function handlePasswordClick() {
+		setShowPassword(showPassword === "password" ? "text" : "password");
+	}
+
 	const {
 		register,
 		handleSubmit,
@@ -61,7 +68,10 @@ const LoginMain = () => {
 						</div>
 						<label htmlFor="email">Password</label>
 						<div className="relative mt-1">
-							<div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3.5">
+							<div
+								onClick={handlePasswordClick}
+								className="pointer-events-auto absolute inset-y-0 start-0 flex items-center ps-3.5"
+							>
 								<img
 									src={password}
 									alt="email icon"
@@ -72,7 +82,7 @@ const LoginMain = () => {
 							<input
 								{...register("password")}
 								autoComplete="off"
-								type="password"
+								type={showPassword}
 								id="password"
 								placeholder="Enter your password address"
 								className="form-input mb-5  block w-full rounded-lg border border-gray-300 bg-gray-50 px-2.5 py-2 ps-10 text-base text-gray-900 hover:placeholder:italic focus:border-neutral-400  focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-zinc-300 dark:placeholder-gray-400  dark:focus:border-zinc-600 dark:focus:ring-stone-500"
