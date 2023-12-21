@@ -34,8 +34,10 @@ const LoginMain = () => {
 			toast.success("Welcome");
 
 			const token = response.headers["x-auth-token"];
+			const id = response.data["id"];
 
 			localStorage.setItem("x-auth-token", token);
+			localStorage.setItem("userid", id);
 			navigate("/users/:id");
 		} catch (error) {
 			console.error(error);
