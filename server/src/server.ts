@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import UserLogin from "./routes/UserLogin";
 import userRegistration from "./routes/userRegistration";
+import user from "./routes/user";
 
 const app = express();
 const PORT: string | undefined = process.env.PORT;
@@ -20,11 +21,12 @@ const connectToMongoDB = async () => {
 
 connectToMongoDB();
 
-app.use(cors());
+app.use(cors({ exposedHeaders: "x-auth-token" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/login", UserLogin);
 app.use("/api/register", userRegistration);
+app.use("/api/users", user);
 
 app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
