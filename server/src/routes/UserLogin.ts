@@ -4,7 +4,6 @@ import { joiPasswordExtendCore } from "joi-password";
 import { IUserLoginSchema } from "../models/UserLogin";
 import UserRegistration from "../models/UserRegistration";
 import * as bcrypt from "bcrypt";
-import * as jwt from "jsonwebtoken";
 import "dotenv/config";
 import _ from "lodash";
 
@@ -24,7 +23,7 @@ router.post("/", async (req: Request, res: Response) => {
 
 	const token = user.generateAuthToken();
 
-	res.header("x-auth-token", token).send(_.pick(user, ["id", "email"]));
+	res.header("x-auth-token", token).send(_.pick(user, ["id", "email", "role"]));
 });
 
 export const validateUserLogin = (user: IUserLoginSchema) => {

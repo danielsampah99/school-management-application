@@ -10,6 +10,7 @@ export interface IUserRegistrationSchema {
 	name: string;
 	email: string;
 	password: string;
+	role?: string;
 }
 
 const userRegistrationSchema = new mongoose.Schema<IUserRegistrationSchema>({
@@ -33,11 +34,15 @@ const userRegistrationSchema = new mongoose.Schema<IUserRegistrationSchema>({
 		maxlength: 1024,
 		required: true,
 	},
+	role: {
+		type: String,
+		default: "student",
+	},
 });
 
 userRegistrationSchema.methods.generateAuthToken = function () {
 	const token: string = jwt.sign(
-		{ _id: this._id },
+		{ _id: this._id, role: this.role },
 		process.env.JWTSECRETKEY!,
 	);
 	return token;

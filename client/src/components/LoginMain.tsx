@@ -3,13 +3,15 @@ import { useForm } from "react-hook-form";
 import { LoginFormValues, loginSchema } from "../schema/loginSchema";
 import email from "../assets/email.svg";
 import password from "../assets/password.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import apiClient from "../services/apiClient";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
+import { AxiosResponse } from "axios";
 
 const LoginMain = () => {
 	const [showPassword, setShowPassword] = useState("password");
+	const navigate = useNavigate();
 
 	function handlePasswordClick() {
 		setShowPassword(showPassword === "password" ? "text" : "password");
@@ -25,7 +27,16 @@ const LoginMain = () => {
 
 	const onSubmit = handleSubmit(async (data: LoginFormValues) => {
 		try {
-			await apiClient.post("/api/login", data);
+			const response: AxiosResponse = await apiClient.post(
+				"/api/login",
+				data,
+			);
+			toast.success("Welcome");
+
+			const token = response.headers["x-auth-token"];
+
+			localStorage.setItem("x-auth-token", token);
+			navigate("/users/:id");
 		} catch (error) {
 			console.error(error);
 			toast.error("Invalid username or password");
