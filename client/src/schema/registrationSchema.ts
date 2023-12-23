@@ -16,7 +16,7 @@ export const RegistrationSchema = z.object({
 	name: z
 		.string()
 		.max(20, "Full name cannot be more than 30 characters.")
-		.min(4, "Name should at least be 4 of lenght 4 characters"),
+		.min(4, "Name should at least be of length 4 characters."),
 	email: z.string().email(),
 	password: z
 		.string()

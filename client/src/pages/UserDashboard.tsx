@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/apiClient";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 interface User {
-	_id: string;
 	name: string;
 	email: string;
 }
@@ -15,19 +14,20 @@ const UserDashboard = () => {
 		const getUserData = async () => {
 			try {
 				const xAuthToken = localStorage.getItem("x-auth-token");
-				const userid = localStorage.getItem("userid") as string;
+				const email = localStorage.getItem("email") as string;
 
 				const response: AxiosResponse = await apiClient.get<User>(
-					`/api/users/${userid}`,
+					`/api/users/${email}`,
 					{
 						headers: {
 							"x-auth-token": `Bearer ${xAuthToken}`,
 						},
 					},
 				);
+
 				setData(response.data);
 			} catch (error) {
-				console.error(error);
+				if (error === AxiosError) return console.error(error);
 			}
 		};
 		getUserData();
@@ -39,7 +39,11 @@ const UserDashboard = () => {
 				<h1>
 					Welcome{" "}
 					<span className="text-3xl font-semibold text-blue-500">
-						{data?.email}{" "}
+						{data?.name}{" "}
+					</span>{" "}
+					Email:{" "}
+					<span className="text-3xl font-semibold text-blue-500">
+						{data?.email}
 					</span>
 				</h1>
 			</div>

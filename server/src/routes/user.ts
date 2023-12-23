@@ -1,21 +1,21 @@
 import express, { Request, Response } from "express";
 import authenticateToken from "../middleware/authenticationToken";
-import UserRegistration, {
-	IUserRegistrationSchema,
-} from "../models/UserRegistration";
+import UserRegistration from "../models/UserRegistration";
 import _ from "lodash";
 
 const router = express.Router();
 
 router.get("/:id", authenticateToken, async (req: Request, res: Response) => {
-	const userId = req.params.userId;
-	const id = req.params.userId;
+	const email = req.params.id;
 
-	const userDetails: IUserRegistrationSchema | null =
-		await UserRegistration.findById(userId);
+	const userDetails = await UserRegistration.findOne(
+		{ email: req.params.email },
+		{ email: 1, name: 1, _id: 0 },
+	);
+
 	if (!userDetails) return res.status(400).send("Invalid id.");
 
-	res.status(200).json(_.pick(userDetails, ["id", "name", "email"]));
+	res.status(200).json(_.pick(userDetails, ["name", "email"]));
 });
 
 export default router;

@@ -34,10 +34,10 @@ const LoginMain = () => {
 			toast.success("Welcome");
 
 			const token = response.headers["x-auth-token"];
-			const id = response.data["id"];
+			const email = response.data["email"];
 
 			localStorage.setItem("x-auth-token", token);
-			localStorage.setItem("userid", id);
+			localStorage.setItem("email", email);
 			navigate("/users/:id");
 		} catch (error) {
 			console.error(error);
@@ -76,7 +76,7 @@ const LoginMain = () => {
 								type="email"
 								id="email"
 								placeholder="Enter your email address"
-								className="form-input mb-5  block w-full rounded-lg border border-gray-300 bg-gray-50 px-2.5 py-2 ps-10 text-base text-gray-900 hover:placeholder:italic focus:border-neutral-400  focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-zinc-300 dark:placeholder-gray-400  dark:focus:border-zinc-600 dark:focus:ring-stone-500"
+								className="form-input mb-5 block w-full rounded-lg border border-gray-300 bg-gray-50 px-2.5 py-2 ps-10 text-base text-gray-900 hover:placeholder:italic focus:border-neutral-400  focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-zinc-300 dark:placeholder-gray-400  dark:focus:border-zinc-600 dark:focus:ring-stone-500"
 							/>
 						</div>
 						<label htmlFor="email">Password</label>

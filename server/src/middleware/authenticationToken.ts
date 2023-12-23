@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 interface DecodedToken {
-	_id: string;
+	email: string;
 	role: string;
 }
 
@@ -19,7 +19,7 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
 				process.env.JWTSECRETKEY as string,
 			) as DecodedToken;
 
-			req.params.userId = decoded._id;
+			req.params.email = decoded.email;
 			req.params.userRole = decoded.role;
 
 			next();
@@ -27,7 +27,6 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
 			res.status(401).send("Unauthorized");
 		}
 	} catch (error) {
-		console.log("authentication error: ", error);
 		res.status(401).send("Unauthorized");
 	}
 };
