@@ -42,7 +42,7 @@ const userRegistrationSchema = new mongoose.Schema<IUserRegistrationSchema>({
 
 userRegistrationSchema.methods.generateAuthToken = function () {
 	const token: string = jwt.sign(
-		{ _id: this._id, role: this.role },
+		{ email: this.email, role: this.role },
 		process.env.JWTSECRETKEY!,
 	);
 	return token;

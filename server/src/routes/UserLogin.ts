@@ -23,9 +23,7 @@ router.post("/", async (req: Request, res: Response) => {
 
 	const token = user.generateAuthToken();
 
-	res.header("x-auth-token", token).send(
-		_.pick(user, ["id", "email", "role"]),
-	);
+	res.header("x-auth-token", token).send(_.pick(user, ["email", "role"]));
 });
 
 export const validateUserLogin = (user: IUserLoginSchema) => {

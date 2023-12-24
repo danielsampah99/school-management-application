@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import toast, { Toaster } from "react-hot-toast";
 import apiClient from "../services/apiClient";
 import { useState } from "react";
+import axios, { AxiosResponse } from "axios";
 
 const RegisterMain = () => {
 	const [showPassword, setShowPassword] = useState("password");
@@ -29,11 +30,19 @@ const RegisterMain = () => {
 
 	const onSubmit = handleSubmit(async (formData: RegistrationFormValues) => {
 		try {
-			await apiClient.post("/api/register", formData);
-			toast.success("Account successfully created. Proceed to login.");
+			const response: AxiosResponse = await apiClient.post(
+				"/api/register",
+				formData,
+			);
+			toast.success(response.data);
+			// toast.success("Account successfully created. Please proceed to login.");
 		} catch (error) {
-			toast.error("Registration failed! something went wrong");
-			console.error(error);
+			if (axios.isAxiosError(error)) {
+				toast.error(error.response?.data || error.message);
+			} else {
+				toast.error("Something went wrong. Please try again.");
+				console.error("Any other error: ", error);
+			}
 		}
 	});
 
@@ -75,7 +84,7 @@ const RegisterMain = () => {
 						<label htmlFor="email">
 							Email address
 							{errors.email && (
-								<div className="ml-1 inline text-sm font-medium text-red-700 dark:text-red-500">
+								<div className="ml-3 inline text-sm font-medium text-red-700 dark:text-red-500 ">
 									{errors.email.message}
 								</div>
 							)}

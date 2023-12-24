@@ -13,7 +13,6 @@ const route = express.Router();
 route.post("/", async (req: Request, res: Response) => {
 	const saltrounds: number = 10;
 	const salt = await bcrypt.genSalt(saltrounds);
-	const jwtSecretKey: string | undefined = process.env.JWTSECRETKEY;
 
 	const { error } = validateUserRegistration(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
@@ -29,7 +28,10 @@ route.post("/", async (req: Request, res: Response) => {
 
 	await user.save();
 
-	res.send(_.pick<IUserRegistrationSchema>(user, ["name", "email", "_id"]));
+	// res.status(201).send(_.pick<IUserRegistrationSchema>(user, ["email"]));
+	res.status(201).json(
+		"Account successfully created. Kindly proceed to login.",
+	);
 });
 
 export default route;
