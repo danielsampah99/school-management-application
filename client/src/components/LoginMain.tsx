@@ -47,7 +47,7 @@ const LoginMain = () => {
 
 	return (
 		<>
-			<main className="flex h-[90vh] w-auto flex-col items-center  justify-center bg-white/75 p-3 transition-all delay-150 duration-500 dark:bg-stone-800">
+			<main className="flex h-[90vh] w-auto flex-col items-center justify-center bg-white/75 p-3 transition-all delay-150 duration-500 dark:bg-stone-800">
 				<div className="z-50 rounded-2xl border-inherit p-7 shadow-lg dark:bg-zinc-800 dark:text-gray-400 dark:shadow-black/50">
 					<h1 className="mb-5 py-2 text-center text-3xl font-bold text-black/90 dark:text-gray-300 ">
 						LOG IN

@@ -23,8 +23,8 @@ const HomeNavBar = ({ buttonName, schoolName, linkTo }: Props) => {
 				</div>
 				<button
 					type="button"
-					className="text-md cursor-pointer touch-manipulation select-none items-center whitespace-nowrap rounded-xl bg-gradient-to-r from-white/75 to-white/30 px-2 py-2 text-center font-semibold text-black shadow-lg
-					transition-colors hover:from-black/10 hover:to-black/50 hover:text-white lg:mr-4 lg:px-3"
+					className="text-md cursor-pointer touch-manipulation select-none items-center whitespace-nowrap rounded-xl  px-2 py-2 text-center font-semibold text-black shadow-lg dark:bg-stone-800 dark:text-neutral-300
+					transition-colors hover:text-slate-500 hover:shadow-sm lg:mr-4 lg:px-3"
 				>
 					<Link to={linkTo}>{buttonName}</Link>
 				</button>
