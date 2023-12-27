@@ -7,6 +7,7 @@ import ErrorPage from "./pages/ErrorPage.tsx";
 import Register from "./pages/Register.tsx";
 import Login from "./pages/Login.tsx";
 import UserDashboard from "./pages/UserDashboard.tsx";
+import AdminLogin from "./pages/AdminLogin.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -25,7 +26,12 @@ const router = createBrowserRouter([
 	{
 		path: "/users/:id",
 		element: <UserDashboard />,
-		// errorElement: <ErrorPage />
+		errorElement: <ErrorPage />,
+	},
+	{
+		path: "adminlogin",
+		element: <AdminLogin />,
+		errorElement: <ErrorPage />,
 	},
 ]);
 
