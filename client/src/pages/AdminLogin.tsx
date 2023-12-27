@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import AdminLoginMain from "../components/AdminLoginMain";
 import HomeNavBar from "../components/HomeNavBar";
 import RegisterFooter from "../components/RegisterFooter";
@@ -13,6 +14,7 @@ const AdminLogin = () => {
 
 			<AdminLoginMain />
 			<RegisterFooter />
+			<Toaster position={"top-center"} />
 		</>
 	);
 };

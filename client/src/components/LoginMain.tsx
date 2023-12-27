@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import apiClient from "../services/apiClient";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
-import { AxiosResponse } from "axios";
+import { AxiosResponse, isAxiosError } from "axios";
 
 const LoginMain = () => {
 	const [showPassword, setShowPassword] = useState("password");
@@ -40,6 +40,8 @@ const LoginMain = () => {
 			localStorage.setItem("email", email);
 			navigate("/users/:id");
 		} catch (error) {
+			if (isAxiosError(error))
+				return toast.error(error.response?.data || error.message);
 			console.error(error);
 			toast.error("Invalid username or password");
 		}

@@ -1,15 +1,47 @@
 import { useState } from "react";
 import email from "../assets/email.svg";
 import password from "../assets/password.svg";
+import { useForm } from "react-hook-form";
+import { LoginFormValues, loginSchema } from "../schema/loginSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import apiClient from "../services/apiClient";
+import { AxiosResponse, isAxiosError } from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AdminLoginMain = () => {
-
-	const [showPassword, setShowPassword] = useState('password')
-
+	const [showPassword, setShowPassword] = useState("password");
+	const navigate = useNavigate();
 
 	function handleClick() {
-		setShowPassword(showPassword === 'password' ? 'text' : 'password')
+		setShowPassword(showPassword === "password" ? "text" : "password");
 	}
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<LoginFormValues>({ resolver: zodResolver(loginSchema) });
+
+	const onSubmit = handleSubmit(async (data: LoginFormValues) => {
+		try {
+			const response: AxiosResponse = await apiClient.post(
+				"/api/adminlogin",
+				data,
+			);
+
+			const token = response.headers["x-auth-token"];
+			localStorage.setItem("x-auth-token", token);
+
+			toast.success("Login Successful, Welcome");
+
+			navigate("/api/admin:id");
+		} catch (error) {
+			if (isAxiosError(error))
+				return toast.error(error.response?.data || error.message);
+			toast.error("Internal server Error" || (error as string));
+		}
+	});
 
 	return (
 		<>
@@ -19,9 +51,14 @@ const AdminLoginMain = () => {
 						Welcome, Admin.
 					</h1>
 
-					<form >
+					<form onSubmit={onSubmit}>
 						<label htmlFor="email" aria-label="email">
 							Email
+							{errors.email && (
+								<span className="ml-1 inline text-sm font-medium text-red-700 dark:text-red-500">
+									{errors.email.message}.
+								</span>
+							)}
 						</label>
 						<div className="relative mt-1">
 							<div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3.5">
@@ -33,6 +70,7 @@ const AdminLoginMain = () => {
 								/>
 							</div>
 							<input
+								{...register("email")}
 								type="email"
 								name="email"
 								id="email"
@@ -45,7 +83,10 @@ const AdminLoginMain = () => {
 							Password
 						</label>
 						<div className="relative mt-1">
-							<div className="cursor-pointer absolute inset-y-0 start-0 flex items-center ps-3.5" onClick={handleClick}>
+							<div
+								className="absolute inset-y-0 start-0 flex cursor-pointer items-center ps-3.5"
+								onClick={handleClick}
+							>
 								<img
 									src={password}
 									alt="password"
@@ -54,6 +95,7 @@ const AdminLoginMain = () => {
 								/>
 							</div>
 							<input
+								{...register("password")}
 								type={showPassword}
 								name="password"
 								id="password"
