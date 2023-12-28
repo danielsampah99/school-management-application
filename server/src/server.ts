@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import UserLogin from "./routes/UserLogin";
 import userRegistration from "./routes/userRegistration";
 import user from "./routes/user";
+import adminLogin from "./routes/adminLogin";
 
 const app = express();
 const PORT: string | undefined = process.env.PORT;
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/login", UserLogin);
+app.use("/api/adminlogin", adminLogin);
 app.use("/api/register", userRegistration);
 app.use("/api/users", user);
 
