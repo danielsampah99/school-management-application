@@ -22,6 +22,8 @@ const connectToMongoDB = async () => {
 
 connectToMongoDB();
 
+// TO DO: ADMIN BACKEND LOGIN VALIDATION
+
 app.use(cors({ exposedHeaders: "x-auth-token" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

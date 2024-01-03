@@ -8,6 +8,16 @@ import Register from "./pages/Register.tsx";
 import Login from "./pages/Login.tsx";
 import UserDashboard from "./pages/UserDashboard.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
+import AdminDashboard from "./pages/AdminDashboard.tsx";
+import StudentDashboard from "./pages/StudentDashboard.tsx";
+import PaymentInfo from "./components/PaymentInfo.tsx";
+import Schedule from "./components/Schedule.tsx";
+import Results from "./components/Results.tsx";
+import Profile from "./components/Profile.tsx";
+import Notice from "./components/Notice.tsx";
+import LearningMaterials from "./components/LearningMaterials.tsx";
+import Courses from "./components/Courses.tsx";
+import Class from "./components/Class.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -25,12 +35,64 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/users/:id",
-		element: <UserDashboard />,
+		element: <StudentDashboard />,
+		errorElement: <ErrorPage />,
+		children: [
+			{
+				path: "dashboard",
+				errorElement: <ErrorPage />,
+				element: <UserDashboard />,
+			},
+			{
+				path: "payment",
+				errorElement: <ErrorPage />,
+				element: <PaymentInfo />,
+			},
+			{
+				path: "class",
+				errorElement: <ErrorPage />,
+				element: <Class />,
+			},
+			{
+				path: "courses",
+				errorElement: <ErrorPage />,
+				element: <Courses />,
+			},
+			{
+				path: "resources",
+				errorElement: <ErrorPage />,
+				element: <LearningMaterials />,
+			},
+			{
+				path: "notice",
+				errorElement: <ErrorPage />,
+				element: <Notice />,
+			},
+			{
+				path: "profile",
+				errorElement: <ErrorPage />,
+				element: <Profile />,
+			},
+			{
+				path: "results",
+				errorElement: <ErrorPage />,
+				element: <Results />,
+			},
+			{
+				path: "schedule",
+				errorElement: <ErrorPage />,
+				element: <Schedule />,
+			},
+		],
+	},
+	{
+		path: "/adminlogin",
+		element: <AdminLogin />,
 		errorElement: <ErrorPage />,
 	},
 	{
-		path: "adminlogin",
-		element: <AdminLogin />,
+		path: "/admindashboard",
+		element: <AdminDashboard />,
 		errorElement: <ErrorPage />,
 	},
 ]);

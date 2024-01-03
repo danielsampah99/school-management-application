@@ -11,7 +11,6 @@ const AdminLogin = () => {
 				schoolName={"BEDEKU TECHNICAL INSTITUTE"}
 				linkTo={"/"}
 			/>
-
 			<AdminLoginMain />
 			<RegisterFooter />
 			<Toaster position={"top-center"} />
