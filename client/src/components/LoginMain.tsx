@@ -38,7 +38,7 @@ const LoginMain = () => {
 
 			localStorage.setItem("x-auth-token", token);
 			localStorage.setItem("email", email);
-			navigate("/users/:id");
+			navigate("/users/:id/dashboard");
 		} catch (error) {
 			if (isAxiosError(error))
 				return toast.error(error.response?.data || error.message);
