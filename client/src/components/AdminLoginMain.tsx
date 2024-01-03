@@ -35,7 +35,7 @@ const AdminLoginMain = () => {
 
 			toast.success("Login Successful, Welcome");
 
-			navigate("/api/admin:id");
+			navigate("/admindashboard");
 		} catch (error) {
 			if (isAxiosError(error))
 				return toast.error(error.response?.data || error.message);
