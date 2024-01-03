@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 import {
 	Squares2X2Icon,
 	WalletIcon,
@@ -12,6 +12,7 @@ import {
 } from "@heroicons/react/24/solid";
 import IconWrapper from "./IconWrapper";
 import { ReactNode } from "react";
+import StudentLogoutButton from "./StudentLogoutButton";
 
 type SidebarItems = { name: string; icon: ReactNode; path: string };
 
@@ -28,8 +29,15 @@ const sidebarItems: SidebarItems[] = [
 ];
 
 const StudentSidebar = () => {
+	const navigate: NavigateFunction = useNavigate();
+
+	const handleLogout = () => {
+		localStorage.clear();
+		navigate("/login");
+	};
+
 	return (
-		<aside className="ml-1 mt-1 hidden h-screen w-auto rounded-md bg-stone-800 pb-2 pt-3 lg:block">
+		<aside className="relative ml-1 mt-1 hidden h-screen w-auto rounded-md bg-stone-800 py-3 lg:block">
 			<ul>
 				{sidebarItems.map((sidebarItem, index) => (
 					<li
@@ -47,6 +55,12 @@ const StudentSidebar = () => {
 					</li>
 				))}
 			</ul>
+			<StudentLogoutButton
+				onClick={handleLogout}
+				className={
+					"absolute bottom-2 mr-2 w-full cursor-pointer rounded-md p-2 hover:bg-pink-500"
+				}
+			/>
 		</aside>
 	);
 };
