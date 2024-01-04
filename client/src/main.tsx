@@ -6,18 +6,18 @@ import Home from "./pages/Home.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import Register from "./pages/Register.tsx";
 import Login from "./pages/Login.tsx";
-import UserDashboard from "./pages/UserDashboard.tsx";
+import UserDashboard from "./components/Student/UserDashboard.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import StudentDashboard from "./pages/StudentDashboard.tsx";
-import PaymentInfo from "./components/PaymentInfo.tsx";
-import Schedule from "./components/Schedule.tsx";
-import Results from "./components/Results.tsx";
-import Profile from "./components/Profile.tsx";
-import Notice from "./components/Notice.tsx";
-import LearningMaterials from "./components/LearningMaterials.tsx";
-import Courses from "./components/Courses.tsx";
-import Class from "./components/Class.tsx";
+import Payment from "./components/Student/Payment.tsx";
+import Schedule from "./components/Student/Schedule.tsx";
+import Results from "./components/Student/Results.tsx";
+import Profile from "./components/Student/Profile.tsx";
+import Notice from "./components/Student/Notice.tsx";
+import Resources from "./components/Student/Resources.tsx";
+import Courses from "./components/Student/Courses.tsx";
+import Class from "./components/Student/Class.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
 			{
 				path: "payment",
 				errorElement: <ErrorPage />,
-				element: <PaymentInfo />,
+				element: <Payment />,
 			},
 			{
 				path: "class",
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
 			{
 				path: "resources",
 				errorElement: <ErrorPage />,
-				element: <LearningMaterials />,
+				element: <Resources />,
 			},
 			{
 				path: "notice",
