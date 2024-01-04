@@ -14,6 +14,10 @@ import IconWrapper from "../IconWrapper";
 import { ReactNode } from "react";
 import StudentLogoutButton from "./StudentLogoutButton";
 
+interface Props {
+	makeSidebarVisible: string;
+}
+
 type SidebarItems = { name: string; icon: ReactNode; path: string };
 
 const sidebarItems: SidebarItems[] = [
@@ -28,7 +32,7 @@ const sidebarItems: SidebarItems[] = [
 	{ name: "Schedule", icon: <CalendarDaysIcon />, path: "schedule" },
 ];
 
-const StudentSidebar = () => {
+const StudentSidebar = ({ makeSidebarVisible }: Props) => {
 	const navigate: NavigateFunction = useNavigate();
 
 	const handleLogout = () => {
@@ -37,7 +41,9 @@ const StudentSidebar = () => {
 	};
 
 	return (
-		<aside className="relative hidden w-auto flex-shrink-0 select-none flex-col rounded-md bg-stone-800 py-3 lg:block">
+		<aside
+			className={`relative  w-auto flex-shrink-0 select-none flex-col rounded-md bg-stone-800 py-3 ${makeSidebarVisible}`}
+		>
 			<ul>
 				{sidebarItems.map((sidebarItem, index) => (
 					<li
