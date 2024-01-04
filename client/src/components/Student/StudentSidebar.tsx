@@ -10,7 +10,7 @@ import {
 	BookOpenIcon,
 	PresentationChartBarIcon,
 } from "@heroicons/react/24/solid";
-import IconWrapper from "./IconWrapper";
+import IconWrapper from "../IconWrapper";
 import { ReactNode } from "react";
 import StudentLogoutButton from "./StudentLogoutButton";
 
@@ -18,12 +18,12 @@ type SidebarItems = { name: string; icon: ReactNode; path: string };
 
 const sidebarItems: SidebarItems[] = [
 	{ name: "Dashboard", icon: <Squares2X2Icon />, path: "dashboard" },
-	{ name: "Payment Info", icon: <WalletIcon />, path: "payment" },
+	{ name: "Payment", icon: <WalletIcon />, path: "payment" },
 	{ name: "Profile", icon: <UserIcon />, path: "profile" },
 	{ name: "Courses", icon: <RectangleGroupIcon />, path: "courses" },
 	{ name: "Class", icon: <UserGroupIcon />, path: "class" },
 	{ name: "Results", icon: <PresentationChartBarIcon />, path: "results" },
-	{ name: "Learning Materials", icon: <BookOpenIcon />, path: "resources" },
+	{ name: "Resources", icon: <BookOpenIcon />, path: "resources" },
 	{ name: "Notice", icon: <ChatBubbleBottomCenterIcon />, path: "notice" },
 	{ name: "Schedule", icon: <CalendarDaysIcon />, path: "schedule" },
 ];
@@ -37,7 +37,7 @@ const StudentSidebar = () => {
 	};
 
 	return (
-		<aside className="relative ml-1 mt-1 hidden h-screen w-auto rounded-md bg-stone-800 py-3 lg:block">
+		<aside className="relative hidden w-auto flex-shrink-0 select-none flex-col rounded-md bg-stone-800 py-3 lg:block">
 			<ul>
 				{sidebarItems.map((sidebarItem, index) => (
 					<li

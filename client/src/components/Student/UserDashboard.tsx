@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import apiClient from "../services/apiClient";
+import apiClient from "../../services/apiClient";
 import { AxiosError, AxiosResponse } from "axios";
 
 interface User {

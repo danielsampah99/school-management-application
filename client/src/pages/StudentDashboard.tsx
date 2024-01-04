@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import StudentSidebar from "../components/StudentSidebar";
+import StudentSidebar from "../components/Student/StudentSidebar";
 
 const StudentDashboard = () => {
 	return (
 		<>
-			<div className="flex flex-row">
+			<div className="flex min-h-screen">
 				<StudentSidebar />
 				<Outlet />
 			</div>
