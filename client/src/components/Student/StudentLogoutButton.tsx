@@ -2,7 +2,7 @@ import IconWrapper from "../IconWrapper";
 import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/solid";
 
 interface Props {
-	onClick: VoidFunction;
+	onClick: () => void;
 	className: string;
 }
 
