@@ -13,12 +13,12 @@ const StudentDashboard = () => {
 
 	return (
 		<>
-			<div className="min-h-screen">
+			<div className="flex flex-col">
 				<Header
 					buttonIcon={isSideOpen ? <Bars3Icon /> : <XMarkIcon />}
 					onClick={handleHeaderIconClick}
 				/>
-				<div className="flex flex-row">
+				<div className="flex flex-row ">
 					<StudentSidebar
 						makeSidebarVisible={`${
 							isSideOpen ? "hidden" : "block"
