@@ -15,7 +15,7 @@ router.get("/:id", authenticateToken, async (req: Request, res: Response) => {
 
 	if (!userDetails) return res.status(400).send("Invalid id.");
 
-	res.status(200).json(_.pick(userDetails, ["name", "email"]));
+	res.status(200).json(_.pick(userDetails, ["name"]));
 });
 
 export default router;
