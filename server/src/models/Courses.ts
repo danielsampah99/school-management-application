@@ -19,10 +19,10 @@ const coursesSchema = new mongoose.Schema<ICourses>({
 	},
 });
 
-const Courses = mongoose.model("Courses", coursesSchema, "Courses");
+const Course = mongoose.model("Course", coursesSchema, "courses");
 
 // VALIDATION FUNCTION.
-const validateCourses = (course: ICourses) => {
+export const validateCourses = (course: ICourses) => {
 	const schema = Joi.object({
 		name: Joi.string().required(),
 		code: Joi.string().required(),
@@ -31,4 +31,4 @@ const validateCourses = (course: ICourses) => {
 	return schema.validate(course);
 };
 
-export default Courses;
+export default Course;
