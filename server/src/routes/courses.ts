@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import Course, { ICourses, validateCourses } from "../models/Courses";
+import Course, { ICourses, validateCourses } from "../models/Course";
 import * as _ from "lodash";
 import mongoose from "mongoose";
 import rateLimiter from "../middleware/rateLimiter";

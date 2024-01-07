@@ -7,6 +7,7 @@ import userRegistration from "./routes/userRegistration";
 import user from "./routes/user";
 import adminLogin from "./routes/adminLogin";
 import courses from "./routes/courses";
+import students from "./routes/students";
 
 const app = express();
 const PORT: string | undefined = process.env.PORT;
@@ -34,5 +35,6 @@ app.use("/api/adminlogin", adminLogin);
 app.use("/api/register", userRegistration);
 app.use("/api/users", user);
 app.use("/api/courses", courses);
+app.use('/api/students', students)
 
 app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));

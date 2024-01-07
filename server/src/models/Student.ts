@@ -13,6 +13,7 @@ interface IStudent extends Document {
 const studentSchema = new mongoose.Schema<IStudent>({
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
+		ref: 'UserRegistration',
 		required: true,
 		unique: true,
 	},
@@ -40,13 +41,13 @@ const studentSchema = new mongoose.Schema<IStudent>({
 
 const Student = mongoose.model<IStudent>("Student", studentSchema);
 
-export const studentValidation = (student: IStudent) => {
+export const validateStudent = (student: IStudent) => {
 	const schema = Joi.object({
 		user: Joi.string().hex().length(24),
-		student: Joi.string().required(),
+		studentId: Joi.string().required(),
 		year: Joi.string().required(),
-		dateRegistered: Joi.date().required(),
-		courses: Joi.array().items(Joi.string().hex().length(24)),
+		dateRegistered: Joi.date(),
+		courses: Joi.array().items(Joi.string().hex().length(24)).required(),
 	});
 
 	return schema.validate(student);
