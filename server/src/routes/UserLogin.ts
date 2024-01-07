@@ -6,10 +6,11 @@ import UserRegistration from "../models/UserRegistration";
 import * as bcrypt from "bcrypt";
 import "dotenv/config";
 import _ from "lodash";
+import rateLimiter from "../middleware/rateLimiter";
 
 const router = express.Router();
 
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", rateLimiter, async (req: Request, res: Response) => {
 	const jwtSecretKey: string | undefined = process.env.JWTSECRETKEY;
 
 	const { error } = validateUserLogin(req.body);

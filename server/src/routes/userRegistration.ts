@@ -7,10 +7,11 @@ import _ from "lodash";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import "dotenv/config";
+import rateLimiter from "../middleware/rateLimiter";
 
 const route = express.Router();
 
-route.post("/", async (req: Request, res: Response) => {
+route.post("/", rateLimiter, async (req: Request, res: Response) => {
 	const saltrounds: number = 10;
 	const salt = await bcrypt.genSalt(saltrounds);
 
