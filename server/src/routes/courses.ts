@@ -28,6 +28,20 @@ router.get("/", rateLimiter, async (req: Request, res: Response) => {
 	}
 });
 
+router.get("/:id", rateLimiter, async (req: Request, res: Response) => {
+	try {
+		const { id } = req.params;
+
+		const course = await Course.findOne({ name: id });
+
+		if (!course) return res.status(404).json(`Course not found.`);
+
+		res.status(200).json(_.pick(course, ["name", "code"]));
+	} catch (error) {
+		res.status(500).json(`Internal Server Error`);
+	}
+});
+
 router.post("/", [rateLimiter], async (req: Request, res: Response) => {
 	const { error } = validateCourses(req.body);
 
