@@ -6,18 +6,21 @@ export interface ICourses {
 	code: string;
 }
 
-const coursesSchema = new mongoose.Schema<ICourses>({
-	name: {
-		type: String,
-		required: true,
-		unique: true,
+const coursesSchema = new mongoose.Schema<ICourses>(
+	{
+		name: {
+			type: String,
+			required: true,
+			unique: true,
+		},
+		code: {
+			type: String,
+			required: true,
+			unique: true,
+		},
 	},
-	code: {
-		type: String,
-		required: true,
-		unique: true,
-	},
-});
+	{ timestamps: true },
+);
 
 const Course = mongoose.model("Course", coursesSchema, "courses");
 

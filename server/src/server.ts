@@ -35,6 +35,6 @@ app.use("/api/adminlogin", adminLogin);
 app.use("/api/register", userRegistration);
 app.use("/api/users", user);
 app.use("/api/courses", courses);
-app.use('/api/students', students)
+app.use("/api/students", students);
 
 app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));

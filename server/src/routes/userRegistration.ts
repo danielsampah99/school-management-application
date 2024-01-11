@@ -22,7 +22,7 @@ route.post("/", rateLimiter, async (req: Request, res: Response) => {
 	if (user) return res.status(400).send(`User already registered.`);
 
 	user = new UserRegistration(
-		_.pick(req.body, ["name", "email", "password",]),
+		_.pick(req.body, ["name", "email", "password"]),
 	);
 
 	user.password = await bcrypt.hash(user.password, salt);

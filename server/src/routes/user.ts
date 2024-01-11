@@ -7,7 +7,7 @@ import ReqUser from "../models/ReqUser";
 const router = express.Router();
 
 router.get("/:id", authenticateToken, async (req: Request, res: Response) => {
-	const {email} = (req as ReqUser).params
+	const { email } = (req as ReqUser).params;
 
 	const userDetails = await UserRegistration.findOne(
 		{ email: email },

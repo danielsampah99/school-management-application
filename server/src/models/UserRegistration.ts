@@ -13,32 +13,35 @@ export interface IUserRegistrationSchema {
 	role?: string;
 }
 
-const userRegistrationSchema = new mongoose.Schema<IUserRegistrationSchema>({
-	name: {
-		type: String,
-		unique: true,
-		minlength: 4,
-		maxlength: 20,
-		required: true,
+const userRegistrationSchema = new mongoose.Schema<IUserRegistrationSchema>(
+	{
+		name: {
+			type: String,
+			unique: true,
+			minlength: 4,
+			maxlength: 20,
+			required: true,
+		},
+		email: {
+			type: String,
+			unique: true,
+			minlength: 10,
+			maxlength: 30,
+			required: true,
+		},
+		password: {
+			type: String,
+			minlength: 8,
+			maxlength: 1024,
+			required: true,
+		},
+		role: {
+			type: String,
+			default: "student",
+		},
 	},
-	email: {
-		type: String,
-		unique: true,
-		minlength: 10,
-		maxlength: 30,
-		required: true,
-	},
-	password: {
-		type: String,
-		minlength: 8,
-		maxlength: 1024,
-		required: true,
-	},
-	role: {
-		type: String,
-		default: "student",
-	},
-});
+	{ timestamps: true },
+);
 
 userRegistrationSchema.methods.generateAuthToken = function () {
 	const token: string = jwt.sign(

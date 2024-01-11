@@ -13,6 +13,6 @@ interface IUser {
 export type IUserLoginSchema = {
 	email: string;
 	password: string;
-}
+};
 
-export default ReqUser
+export default ReqUser;
