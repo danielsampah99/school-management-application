@@ -2,14 +2,15 @@ import express, { Request, Response } from "express";
 import authenticateToken from "../middleware/authenticationToken";
 import UserRegistration from "../models/UserRegistration";
 import _ from "lodash";
+import ReqUser from "../models/ReqUser";
 
 const router = express.Router();
 
 router.get("/:id", authenticateToken, async (req: Request, res: Response) => {
-	const email = req.params.id;
+	const { email } = (req as ReqUser).params;
 
 	const userDetails = await UserRegistration.findOne(
-		{ email: req.params.email },
+		{ email: email },
 		{ email: 1, name: 1, _id: 0 },
 	);
 

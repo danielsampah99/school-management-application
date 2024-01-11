@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import Course, { ICourses, validateCourses } from "../models/Courses";
+import Course, { ICourses, validateCourses } from "../models/Course";
 import * as _ from "lodash";
 import mongoose from "mongoose";
 import rateLimiter from "../middleware/rateLimiter";
@@ -14,7 +14,6 @@ router.get("/", rateLimiter, async (req: Request, res: Response) => {
 		const filteredCourses = courses.map((course) =>
 			_.pick(course, ["name", "code"]),
 		);
-		console.table(filteredCourses);
 
 		if (!courses || courses.length === 0)
 			return res.status(404).json({ message: "No results returned." });
@@ -67,7 +66,6 @@ router.put("/:id", rateLimiter, async (req: Request, res: Response) => {
 
 	const { error } = validateCourses(req.body);
 	if (error) {
-		console.error(error.message);
 		res.status(400).json(error.message);
 		return;
 	}

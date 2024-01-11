@@ -7,6 +7,8 @@ import userRegistration from "./routes/userRegistration";
 import user from "./routes/user";
 import adminLogin from "./routes/adminLogin";
 import courses from "./routes/courses";
+import students from "./routes/students";
+import rateLimiter from "./middleware/rateLimiter";
 
 const app = express();
 const PORT: string | undefined = process.env.PORT;
@@ -28,11 +30,13 @@ connectToMongoDB();
 app.use(cors({ exposedHeaders: "x-auth-token" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(rateLimiter)
 
 app.use("/api/login", UserLogin);
 app.use("/api/adminlogin", adminLogin);
 app.use("/api/register", userRegistration);
 app.use("/api/users", user);
 app.use("/api/courses", courses);
+app.use("/api/students", students);
 
 app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
