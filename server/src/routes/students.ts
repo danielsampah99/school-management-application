@@ -123,7 +123,7 @@ router.post(
 				return;
 			}
 
-			res.status(500).send(error);
+			res.status(500).send('Internal server Error.');
 		}
 	},
 );
@@ -157,7 +157,7 @@ router.put(
 			}
 
 			const student = await Student.findOneAndUpdate(
-				{ user: request.user._id },
+				{ user: {$eq: request.user._id} },
 				requestStudent,
 				{
 					returnOriginal: false,
@@ -201,7 +201,7 @@ router.delete(
 			}
 
 			const student = await Student.findOneAndDelete(
-				{ user: request.user._id },
+				{ user: {$eq: request.user._id} },
 				{ includeResultMetadata: true },
 			);
 
