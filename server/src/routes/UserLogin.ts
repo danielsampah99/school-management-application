@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import Joi from "joi";
 import { joiPasswordExtendCore } from "joi-password";
-import { IUserLoginSchema } from "../models/UserLogin";
+import { IUserLoginSchema } from "../models/ReqUser";
 import UserRegistration from "../models/UserRegistration";
 import * as bcrypt from "bcrypt";
 import "dotenv/config";
