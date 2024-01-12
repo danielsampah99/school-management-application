@@ -6,25 +6,6 @@ import rateLimiter from "../middleware/rateLimiter";
 
 const router = express.Router();
 
-router.post("/", rateLimiter, async (req: Request, res: Response) => {
-	const user = await UserRegistration.findOne({
-		email: req.body.email,
-		role: "admin",
-	});
-	if (!user) return res.status(400).send("Invalid username or password");
-
-	const userPassword = await bcrypt.compare(req.body.password, user.password);
-	if (!userPassword)
-		return res.status(400).send("Invalid username or password");
-
-	const token = user.generateAuthToken();
-
-	res.header("x-auth-token", token)
-		.status(200)
-		.json({
-			userInfo: _.pick(user, ["email", "name"]),
-			message: "Login Successful",
-		});
-});
+router.post("/", rateLimiter);
 
 export default router;
