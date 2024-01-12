@@ -30,7 +30,7 @@ connectToMongoDB();
 app.use(cors({ exposedHeaders: "x-auth-token" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(rateLimiter)
+app.use(rateLimiter);
 
 app.use("/api/login", UserLogin);
 app.use("/api/adminlogin", adminLogin);
