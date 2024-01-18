@@ -9,6 +9,7 @@ import adminLogin from "./routes/adminLogin";
 import courses from "./routes/courses";
 import students from "./routes/students";
 import rateLimiter from "./middleware/rateLimiter";
+import { createLogger, format, transports } from "winston";
 
 const app = express();
 const PORT: string | undefined = process.env.PORT;
@@ -26,6 +27,23 @@ const connectToMongoDB = async () => {
 connectToMongoDB();
 
 // TO DO: ADMIN BACKEND LOGIN VALIDATION
+
+const logger = createLogger({
+	level: "verbose",
+	transports: [
+		new transports.Console(),
+		new transports.File({ filename: "Combined log", level: 'info' }),
+	],
+	format: format.combine(
+		format.colorize(),
+		format.timestamp(),
+		format.json(),
+		format.prettyPrint(),
+		format.printf(({ timestamp, level, message }) => {
+			return `${timestamp} ${level}: ${message}`
+		})
+	),
+});
 
 app.use(cors({ exposedHeaders: "x-auth-token" }));
 app.use(express.json());

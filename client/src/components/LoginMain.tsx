@@ -34,11 +34,13 @@ const LoginMain = () => {
 			toast.success("Welcome");
 
 			const token = response.headers["x-auth-token"];
-			const email = response.data["email"];
+			const email = response.data["email"] as string;
 
 			localStorage.setItem("x-auth-token", token);
 			localStorage.setItem("email", email);
-			navigate("/users/:id/dashboard");
+
+			
+			navigate(`/${email.split('@')[0]}/dashboard`);
 		} catch (error) {
 			if (isAxiosError(error))
 				return toast.error(error.response?.data || error.message);
