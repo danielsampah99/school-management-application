@@ -3,6 +3,7 @@ import IconWrapper from "../IconWrapper";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { AxiosResponse, AxiosError } from "axios";
 import apiClient from "../../services/apiClient";
+import toast from "react-hot-toast";
 
 interface Props {
 	buttonIcon: ReactNode;
@@ -34,7 +35,7 @@ const Header = ({ buttonIcon, onClick }: Props) => {
 				setData(response.data);
 				console.table(data?.name)
 			} catch (error) {
-				if (error === AxiosError) return console.error(error);
+				if (error instanceof AxiosError) return toast.error(error.message);
 				console.error(error);
 				
 			}
@@ -42,7 +43,7 @@ const Header = ({ buttonIcon, onClick }: Props) => {
 		getUserData();
 	}, [data?.name]);
 	return (
-		<div className="top-0 flex w-full h-auto select-none cursor-pointer flex-wrap items-center justify-between p-3">
+		<div className="top-0 flex w-full h-auto select-none cursor-pointer flex-norap items-center justify-between p-3 shadow-md">
 			<button aria-label="toggle sidebar" onClick={onClick}>
 				<IconWrapper
 					className={

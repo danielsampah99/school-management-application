@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 
 const StudentDashboard = () => {
-	const [isSideOpen, setIsSideOpen] = useState<boolean>(false);
+	const [isSideOpen, setIsSideOpen] = useState<boolean>(true);
 
 	const handleHeaderIconClick = () => {
 		setIsSideOpen(!isSideOpen);
