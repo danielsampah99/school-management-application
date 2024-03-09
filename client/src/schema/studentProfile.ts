@@ -83,5 +83,5 @@ export const StudentProfileSchema = z.object({
 	guardianNumber: z.string({ required_error: 'Phone number of guardian is required.' }),
 	relationshipWithGuardian: z.string(), 
 	allergies: z.string(), 
-	studentPhoto: z.string({invalid_type_error: 'Incorrect file type'}).optional()
+	studentPhoto: z.any()
 });

@@ -127,7 +127,7 @@ const Profile = () => {
 
 		if (currentStep < steps.length - 1) {
 			if (currentStep === steps.length - 2)
-				handleSubmit(onSubmit)
+				await handleSubmit(onSubmit)()
 		}
 		setPreviousStep(currentStep);
 		setCurrentStep((step) => step + 1);
@@ -533,7 +533,7 @@ const Profile = () => {
 														className={
 															"m-1 p-1 hover:mx-1 hover:rounded-md hover:bg-blue-500 hover:text-gray-200 focus:mx-1 focus:rounded-md focus:bg-sky-500 focus:text-white focus:ring-transparent active:rounded-md active:bg-amber-700 active:text-white/75 ui-open:bg-amber-800 ui-active:bg-sky-500 ui-active:text-white/90 ui-not-active:bg-white ui-not-active:text-black"
 														}
-														value={course}
+														value={course.name}
 														key={course.code}
 													>
 														{course.name}
